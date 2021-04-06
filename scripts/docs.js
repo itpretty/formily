@@ -14,7 +14,7 @@ window.codeSandBoxDependencies = {
   '@formily/react': 'latest',
   '@formily/printer': 'latest',
   '@babel/runtime':'latest',
-  'styled-components':'^5.0.0',
+  'styled-components':'^4.0.0',
   'mfetch':'latest',
   antd: 'latest'
 }
@@ -76,11 +76,11 @@ const createDocs = async () => {
 
       Object.assign(webpackConfig.resolve.alias, {
         ...alias,
-        '@alifd/next': path.resolve(
+        '@alifd/next$': path.resolve(
           __dirname,
-          '../packages/next/node_modules/@alifd/next'
+          '../node_modules/@alifd/next'
         ),
-        antd: path.resolve(__dirname, '../packages/antd/node_modules/antd')
+        'antd$': path.resolve(__dirname, '../node_modules/antd')
       })
       webpackConfig.resolve.plugins = [
         new TsconfigPathsPlugin({

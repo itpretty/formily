@@ -24,7 +24,7 @@ const insetStyle = (props) => {
                 border-radius: 4px;
             }
         ` : `
-            .ant-form-item.mega-layout-item.ant-row {
+            &.mega-layout-item .ant-form-item.ant-row {
                 padding-left: 0;
                 border: none;
             }
@@ -81,6 +81,9 @@ const insetStyle = (props) => {
                     padding-right: 0;
                 }
 
+                .ant-radio-group {
+                    line-height: 1.5715;
+                }
                 .ant-checkbox-group {
                     padding-left: 0;
                 }

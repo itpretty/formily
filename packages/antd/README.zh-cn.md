@@ -522,7 +522,7 @@ ReactDOM.render(<App />, document.getElementById('root'))
 | sticky          | 是否吸附在页面底部 | boolean                                                                            |        |
 | itemStyle       | 每个 Btn 的样式    | React.CSSProperties                                                                |        |
 | align           | 对齐方式           | 'left' `or` 'right' `or` 'start' `or` 'end' `or` 'top' `or` 'bottom' `or` 'center' |        |
-| triggerDistance | 按钮间距离         | number                                                                             |        |
+| triggerDistance | 按钮吸底的偏移量，sticky 为 true 时生效 | number                                                                             |        |
 | zIndex          | z-index            | number                                                                             |        |
 | span            | 跨列配置           | number                                                                             | string |  |
 | offset          | 偏移配置           | number                                                                             | string |  |
@@ -1667,6 +1667,43 @@ const App = () => {
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
+#### registerPreviewTextComponent
+
+全局扩展 `<PreviewText/>` UI 组件
+
+```typescript
+function registerPreviewTextComponent(
+  component: React.JSXElementConstructor<any>
+)
+```
+
+**用法**
+
+```jsx
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {
+  SchemaForm,
+  SchemaMarkupField as Field,
+  registerPreviewTextComponent
+} from '@formily/antd'
+import { Input } from '@formily/antd-components'
+
+registerPreviewTextComponent(props => {
+  return <div>**自定义PreviewText**</div>
+})
+
+const App = () => {
+  return (
+    <SchemaForm components={{ Input }} editable={false}>
+      <Field type="string" name="name" title="Name" x-component="Input" />
+    </SchemaForm>
+  )
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))
+```
+
 #### registerFormField
 
 ```typescript
@@ -2036,7 +2073,7 @@ interface IFormActions {
   }): Promise<void | IFormValidateResult>
 
   /*
-   * 校验表单, 当校验失败时抛出异常
+   * 校验表单, 当校验失败时抛出异常(注意：该校验只针对对x-rules进行校验，不会校验手动设置的errors)
    */
   validate(
     path?: FormPathPattern,
