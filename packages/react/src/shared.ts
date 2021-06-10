@@ -330,7 +330,7 @@ export const createEffectsProvider = <
   const resolves = {}
 
   const resolvePayload = (payload: any) => {
-    return isFn(payload.getState) ? payload.getState() : payload
+    return isFn(payload.getState) ? payload?.getState() : payload
   }
 
   const waitFor = async <TPayload = any>(
@@ -460,7 +460,7 @@ export const inspectChanged = (
   let changeNum = 0
   const changedProps = {}
   each(keys, (key: string) => {
-    if (!isEqual(source[key], target[key])) {
+    if (!isEqual(source[key], target[key], true)) {
       changeNum++
       changedProps[key] = target[key]
     }
